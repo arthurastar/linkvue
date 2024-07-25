@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jitsi Meet Custom Room</title>
+    <script src="https://meet.jit.si/external_api.js"></script>
+    <style>
+        #jitsi-meet {
+            width: 1920px;  /* 100% da largura do pai */
+            height: 800px; /* 100% da altura da janela de visualização */
+            margin: 0 auto; /* Centraliza o vídeo horizontalmente */
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+<div id="jitsi-meet"></div>
+<script>
+    const domain = "jitsi.factoryshared.izap.dev";
+    const options = {
+        roomName: "Caio2",
+        parentNode: document.querySelector('#jitsi-meet'),
+        configOverwrite: {
+            prejoinPageEnabled: false
+        },
+        interfaceConfigOverwrite: {
+            SHOW_JITSI_WATERMARK: false,
+        },
+        userInfo: {
+            email: "moderator@example.com"
+        }
+    };
+    const api = new JitsiMeetExternalAPI(domain, options);
+
+    api.addEventListener('videoConferenceJoined', () => {
+        api.executeCommand('password', 'YOUR_PASSWORD');
+    });
+</script>
+</body>
+</html>
